@@ -1,12 +1,12 @@
-import app from "./server";
+import app from "./serverold.js";
 import mongodb from 'mongodb';
 import dotenv from 'dotenv';
 
 async function main() {
     dotenv.config();
 
-    const client = new mongodb.MongoClient(process.env.MOVIEREVIEWS_DB_URI)
-    const port = process.env.PORT || 1000;
+    const client = new mongodb.MongoClient(process.env.MOVIEREVIEWS_DB_URI);
+    const port = process.env.PORT || 8000;
 
     try{
         await client.connect();
