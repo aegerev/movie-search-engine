@@ -1,6 +1,7 @@
 import app from "./server.js";
 import mongodb from 'mongodb';
 import dotenv from 'dotenv';
+import MoviesAAO from "./AAO/moviesAAO.js";
 
 
 async function main() {
@@ -10,7 +11,11 @@ async function main() {
 
     try{
         await client.connect();
+        await MoviesAAO.injectDB(client);
 
+        app.listen(port, () => {
+            console.log("Activate Port " + port);
+        })
         
     } catch (e) {
         console.error(e);
