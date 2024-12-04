@@ -3,7 +3,6 @@ import mongodb from 'mongodb';
 import dotenv from 'dotenv';
 import MoviesAAO from "./AAO/moviesAAO.js";
 
-
 async function main() {
     dotenv.config();
 
