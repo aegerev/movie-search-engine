@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 import MoviesAAO from "./AAO/moviesAAO.js";
 
 async function main() {
+
+    const port = process.env.PORT || 5000;
+
     dotenv.config();
 
     const client = new mongodb.MongoClient(process.env.MOVIEREVIEWS_DB_URI);
