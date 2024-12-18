@@ -1,4 +1,7 @@
 import MoviesAAO from "../AAO/moviesAAO.js";
+import express from "express";
+
+let router = express.Router();
 
 export default class MoviesController{
     static async apiGetMovies(req, res, next) {
@@ -23,5 +26,34 @@ export default class MoviesController{
             total_results: totalNumMovies,
         }
         res.json(response);
+    }
+
+    static async apiGetMovieByID(req, res, next) {
+        try {
+            let id = req.params.id || {};
+            let movie = await MoviesAAO.getMovieByID(id);
+
+            if(!movie){
+                res.status(404).json({error:"not found"});
+                return;
+            }
+            res.json(movie);
+        } catch(e) {
+            console.log(`api, ${e}`);
+            res.status(500).json({error: e});
+        }
+    }
+
+    static async apiGetRatings(req, res, next) {
+        try {
+            let propertyTypes = await MoviesAAO.getRatings();
+
+            res.json(propertyTypes);
+
+        } catch (error) {
+            console.log(`api, ${e}`);
+
+            res.status(500).json({error: e});
+        }
     }
 }
