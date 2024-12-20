@@ -12,6 +12,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import './App.css';
 
 function App() {
+
+  let [user, setUser] = React.useState(null);
+
+  async function login(user = null) {
+    setUser(user)
+  }
+
+  async function logout(user = null) {
+    setUser(user)
+  }
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -19,8 +30,14 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>  
-            <Nav.Link href="#link">Link</Nav.Link>  
+          <Nav.Link href="/movies">Movies</Nav.Link>  
+          <Nav.Link>
+              {user ? (
+                <a onClick={logout}>Logout User</a>
+              ) : (
+                <a href="/login">Login</a>
+              )}
+            </Nav.Link>
           </Nav>
           </Navbar.Collapse>
       </Navbar>
