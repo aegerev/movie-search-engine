@@ -34,13 +34,13 @@ export default class MoviesController{
             let movie = await MoviesAAO.getMovieByID(id);
 
             if(!movie){
-                res.status(404).json({error:"not found"});
+                res.status(404).json({ error: "Movie not found" });
                 return;
             }
             res.json(movie);
-        } catch(e) {
-            console.log(`api, ${e}`);
-            res.status(500).json({error: e});
+        } catch(error) {
+            console.error(error);
+            res.status(500).json({ error: "An error occurred" });
         }
     }
 
@@ -51,9 +51,8 @@ export default class MoviesController{
             res.json(propertyTypes);
 
         } catch (error) {
-            console.log(`api, ${e}`);
-
-            res.status(500).json({error: e});
+            console.error(error);
+            res.status(500).json({ error: "An error occurred while fetching ratings" });
         }
     }
 }
