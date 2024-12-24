@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongodb from 'mongodb';
+
 import movies from './api/movies.route.js';
 import MoviesAAO from "./AAO/moviesAAO.js";
 

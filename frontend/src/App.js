@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import MoviesList from './components/movies-list';
-import Movie from './components/movie';
+// import Movie from './components/movie';
 
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar';
@@ -15,6 +15,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 
 import MovieDataService from './services/movies.js'
 
@@ -84,7 +85,7 @@ function App() {
 
        const findByRating = () => {
         if(searchRating === "All Ratings") {
-            // retrieveMovies()
+            retrieveMovies()
             return;
         } else {
             find(searchRating, "rated");
@@ -106,54 +107,32 @@ function App() {
 
       <Routes>
         <Route path="/movies" element={<MoviesList />} />
-        <Route path="/movies/:id" element={<Movie user={user} />} />
+        {/* <Route path="/movies/:id" element={<Movie user={user} />} /> */}
       </Routes>
 
       <Container>
-                <Form>
-                    <Row>
+                <Row>
+                   {movies.map((movie) => {
+                    return (
                         <Col>
-                            <Form.Group>
-                                <Form.Control
-                                 type="text"
-                                 placeholder="Search by title"
-                                 value={searchTitle}
-                                 onChange={onChangeSearchTitle}
-                                 />
-                            </Form.Group>
-
-                            <Button 
-                             variant="primary"
-                             type="button"
-                             onClick={findByTitle}
-                             >Search
-                             </Button>
+                            <Card style={{width: '18rem'}}>
+                                <Card.Img src={movie.poster+"/100px180"}/>
+                                <Card.Body>
+                                    <Card.Title>{movie.title}</Card.Title>
+                                    <Card.Text>
+                                        Rating: {movie.rated}
+                                    </Card.Text>
+                                    <Card.Text>{movie.plot}</Card.Text>
+                                    <Link to={"movies/" + movie._id}>View Movie Details </Link>
+                                </Card.Body>
+                            </Card>
                         </Col>
-
-                        <Col>
-                        <Form.Group>
-                                <Form.Control
-                                 as="select"
-                                 onChange={onChangeSearchRating}>
-                                    {ratings.map(rating => {
-                                        return(
-                                            <option value={rating}>{rating}</option>
-                                        )
-                                    })}
-                                 </Form.Control>
-                                 </Form.Group>
-                                
-                             <Button 
-                                 variant="primary"
-                                 type="button"
-                                 onClick={findByRating}
-                                >Search
-                             </Button>
-                        </Col>
-                    </Row>
-                </Form>
+                    )
+                   })} 
+                </Row>
             </Container>
-      <h1>Hi Ariel!</h1>
+
+      {/* <h1>Hi Ariel!</h1> */}
     </div>
     </BrowserRouter>
   );

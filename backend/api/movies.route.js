@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => { 
   try {
-    const { moviesList, totalNumMovies } = await MoviesController.apiGetMovies(req, res, next); 
-    res.json({ 
-      movies: moviesList, 
-      page: req.query.page, 
-      filters: req.query, 
-      entries_per_page: req.query.moviesPerPage, 
-      total_results: totalNumMovies 
+    const { moviesList, totalNumMovies } = await MoviesController.apiGetMovies(req, res, next);
+    res.json({
+      movies: moviesList,
+      page: req.query.page,
+      filters: req.query,
+      entries_per_page: req.query.moviesPerPage,
+      total_results: totalNumMovies
     });
   } catch (error) {
     console.error(error);
